@@ -1,7 +1,7 @@
 import { AddTodo } from './add-todo'
 import { AddTodoEntity, TodoEntity, AddTodoRepository } from './add-todo-protocols'
 
-const makeFakeDataAddTodoModel = (): AddTodoEntity => ({
+const makeFakeDataAddTodoEntity = (): AddTodoEntity => ({
   name: 'valid_name'
 })
 
@@ -36,9 +36,18 @@ describe('AddTodo UseCase', () => {
   test('Should call AddTodoRepository with correct values', async () => {
     const { sut, addTodoRepositoryStub } = makeSut()
     const addSpy = jest.spyOn(addTodoRepositoryStub, 'add')
-    await sut.add(makeFakeDataAddTodoModel())
+    const addTodoData = makeFakeDataAddTodoEntity()
+    await sut.add(addTodoData)
     expect(addSpy).toHaveBeenCalledWith({
       name: 'valid_name'
     })
+  })
+
+  test('Should throw if AddTodoRepository throws', async () => {
+    const { sut, addTodoRepositoryStub } = makeSut()
+    const addTodoData = makeFakeDataAddTodoEntity()
+    jest.spyOn(addTodoRepositoryStub, 'add').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const promise = sut.add(addTodoData)
+    expect(promise).rejects.toThrow()
   })
 })
