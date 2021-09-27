@@ -3,5 +3,5 @@ import { AddTodoEntity } from "../../../entities/add-todo";
 
 
 export interface AddTodoRepository {
-  add (addTodoEntity: AddTodoEntity): Promise<TodoEntity>
+  add (addTodoData: AddTodoEntity): Promise<TodoEntity>
 }

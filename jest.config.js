@@ -15,5 +15,11 @@ module.exports = {
   "transform": {
     "^.+\\.(ts|tsx)$": "ts-jest"
   },
-  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: "<rootDir>/" })
+  "collectCoverageFrom": [
+    '<rootDir>/src/**/*.ts'
+  ],
+  "coverageDirectory": 'coverage',
+  "testEnvironment": 'node',
+  "preset": '@shelf/jest-mongodb',
+  "moduleNameMapper": pathsToModuleNameMapper(compilerOptions.paths, { prefix: "<rootDir>/" })
 };

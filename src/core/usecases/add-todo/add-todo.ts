@@ -7,7 +7,7 @@ export class AddTodo {
     this.addTodoRepository = addTodoRepository
   }
 
-  async add (addTodoEntity: AddTodoEntity): Promise<TodoEntity> {
-    return await this.addTodoRepository.add(addTodoEntity)
+  async add (addTodoData: AddTodoEntity): Promise<TodoEntity> {
+    return await this.addTodoRepository.add(addTodoData)
   }
 }
